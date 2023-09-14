@@ -6,7 +6,7 @@ body {
 .divb{
     margin-top: 10%;
 }
-.card-container {
+.card-container,.card-container2 {
     display: flex;
     /* min-height: 400px; */
     height: fit-content;
@@ -52,8 +52,9 @@ body {
 
 .card img {
     max-width: 100%;
-    height: auto;
+    height: 30vh;
     margin-bottom: 10px;
+    
 }
 
 .card h3 {
