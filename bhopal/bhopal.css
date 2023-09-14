@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    padding: 0;
+    /* overflow: hidden; */
+}
+.divb{
+    margin-top: 10%;
+}
+.card-container {
+    display: flex;
+    /* min-height: 400px; */
+    height: fit-content;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
+    width: 100%;
+    white-space: nowrap;
+    scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
+.card {
+    flex: 0 0 auto;
+    flex-direction: column;
+    height: fit-content;
+    width: 300px; 
+    height: fit-content; 
+    background-color: #f0f0f0;
+    margin-right: 20px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    scroll-snap-align: start;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 20px;
+}
+.menu {
+    margin: 20px;
+}
+
+.menu h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Existing CSS styles remain the same */
+
+
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    font-size: 20px;
+}
+
+.card p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.card .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.card .btn:hover {
+    background-color: #0056b3;
+}

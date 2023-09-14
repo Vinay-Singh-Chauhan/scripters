@@ -19,7 +19,7 @@ header {
     display:flex;
     position:fixed;
     top:0px;
-    width: 1240px;
+    width: 100vw;
 }
 
 .logo a {
