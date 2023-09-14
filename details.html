@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Details - Trip Planner</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style>
+        /* Reset some default styles */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Header Styles */
+header {
+    background-color: #252b42;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+}
+
+.logo a {
+    text-decoration: none;
+    font-size: 28px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin-left: auto;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links li:last-child {
+    margin-right: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ffbb00;
+}
+
+/* Trip Details Section Styles */
+.trip-details {
+    background-color: #f0f0f0;
+    padding: 50px 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+}
+
+h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.trip-info {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="#">Trip Planner</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Plan a Trip</a></li>
+                <li><a href="#">My Trips</a></li>
+                <li><a href="#">Sign In</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="trip-details">
+        <div class="container">
+            <h2>Trip Details</h2>
+            <div class="trip-info">
+                <h3>Destination:</h3>
+                <p id="destination"></p>
+                <h3>Trip Dates:</h3>
+                <p id="trip-dates"></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Trip Planner</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        // Initialize Firebase with your own configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOSp3JrI_A0ZIicFncd2f68koN7yx2ZrA",
+            authDomain: "tourism-6fbcb.firebaseapp.com",
+            databaseURL: "https://tourism-6fbcb-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "tourism-6fbcb",
+            storageBucket: "tourism-6fbcb.appspot.com",
+            messagingSenderId: "952187889641",
+            appId: "1:952187889641:web:65243c946c0b7012128d78"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the Firebase Realtime Database
+        const database = firebase.database();
+
+        // Function to retrieve trip details by ID
+        function getTripDetails(tripId) {
+            const tripRef = database.ref(`/trips/${tripId}`);
+
+            tripRef.once('value')
+                .then((snapshot) => {
+                    const tripData = snapshot.val();
+                    if (tripData) {
+                        // Update the HTML elements with trip details
+                        document.getElementById('destination').textContent = tripData.place;
+                        document.getElementById('trip-dates').textContent = `${tripData.startDate} to ${tripData.endDate}`;
+                    } else {
+                        // Handle case where trip data is not found
+                        console.error('Trip data not found.');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error retrieving trip details:', error);
+                });
+        }
+
+        // Check if tripId is available in the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const tripId = urlParams.get('tripId');
+
+        // Call the function to retrieve and display trip details
+        if (tripId) {
+            getTripDetails(tripId);
+        }
+
+    </script>
+</body>
+</html>
